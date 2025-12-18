@@ -1,0 +1,7 @@
+.app-shell {
+  transition: background 0.3s ease;
+}
+
+.app-shell a {
+  font-weight: 600;
+}
