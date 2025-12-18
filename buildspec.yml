@@ -1,42 +1,24 @@
-version: 0.2
 
-env:
-  variables:
-    NODE_ENV: production
-    # 필요 시 환경변수를 여기서 주입 (API_BASE_URL, etc.)
+version: 0.2
 
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 20
     commands:
-      - echo "Install phase - using Node.js $(node -v)"
+      - node -v
+      - npm -v
       - npm ci
-      # yarn/pnpm을 쓰면 아래로 변경:
-      # - corepack enable && corepack prepare yarn@stable --activate && yarn install --frozen-lockfile
-      # - corepack enable && corepack prepare pnpm@latest --activate && pnpm install --frozen-lockfile
-  pre_build:
-    commands:
-      - echo "Running tests (optional)"
-      - npm test -- --watch=false || echo "Tests failed or skipped"
   build:
     commands:
-      - echo "Building React app"
       - npm run build
-      # Vite면: npm run build (기본)
-      # Next.js Static Export:
-      # - npm run build && npm run export
   post_build:
     commands:
       - echo "Build completed on `date`"
-      - ls -la
+      - ls -la dist || true
 
 artifacts:
-  # CRA/Vite 기본 빌드 폴더는 'build' 또는 'dist'
-  base-directory: build
   files:
     - '**/*'
 
-cache:
-  paths:
 
