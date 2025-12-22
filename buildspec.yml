@@ -6,13 +6,11 @@ phases:
       nodejs: 18
   build:
     commands:
-      - echo Build start
       - npm install
       - npm run build
 
 artifacts:
-  base-directory: dist
   files:
-    - '**/*'
     - appspec.yml
     - 'scripts/**/*'
+    - 'dist/**/*'
