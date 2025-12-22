@@ -17,17 +17,6 @@ permissions:
       - directory
 
 hooks:
-  BeforeInstall:
-    - location: scripts/before_install.sh
-      timeout: 300
-      runas: root
-
-  AfterInstall:
-    - location: scripts/after_install.sh
-      timeout: 300
-      runas: root
-
   ApplicationStart:
-    - location: scripts/start.sh
+    - location: deploy-scripts/application-start-hook.sh
       timeout: 300
-      runas: root
