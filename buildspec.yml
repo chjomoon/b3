@@ -29,6 +29,8 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
+    - 'dist/test-angular-proejct/**/*'
+    - appspec.yml
+    - 'scripts/**/*
   base-directory: dist
 
