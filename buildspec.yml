@@ -28,7 +28,8 @@ phases:
       - ls -la dist || true
 
 artifacts:
+  base-directory: dist
   files:
-     - 'dist/test-angular-proejct/**/*'
-     - appspec.yml
-     - 'scripts/**/*'
+    - 'test-angular-proejct/**/*'
+    - appspec.yml
+    - 'scripts/**/*'
