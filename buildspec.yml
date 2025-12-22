@@ -1,31 +1,14 @@
-
 version: 0.2
 
 phases:
   install:
     runtime-versions:
-      nodejs: 20
-    commands:
-      - echo "Install phase"
-      # Node가 없는 표준 이미지라면 설치 (Ubuntu 예시)
-      - curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-      - apt-get update && apt-get install -y nodejs
-      - node -v && npm -v  
-  pre_build:
-    commands:
-      - echo "Pre-build"
-      - pwd && ls -la
-      # package.json이 있는 경로로 이동
-      - cd src  # 필요 시 수정
-      - npm ci
+      nodejs: 18
   build:
     commands:
-      - echo "Build"
+      - echo Build start
+      - npm install
       - npm run build
-  post_build:
-    commands:
-      - echo "Build completed on `date`"
-      - ls -la dist || true
 
 artifacts:
   base-directory: dist
