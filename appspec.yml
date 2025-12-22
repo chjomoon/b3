@@ -1,0 +1,39 @@
+version: 0.0               # 또는 0.1/0.2 (리비전 형식에 따라)
+os: linux
+
+files:
+  - source: /               # 압축(리비전) 내 루트 기준
+    destination: /var/www/myapp  # EC2 인스턴스의 배포 경로
+    overwrite: true
+
+permissions:
+  - object: /var/www/myapp
+    pattern: "**"
+    owner: ec2-user         # 배포할 사용자
+    group: ec2-user
+    mode: 755
+    type:
+      - file
+      - directory
+
+hooks:
+  BeforeInstall:
+    - location: scripts/before_install.sh
+      timeout: 300
+      runas: root
+
+  AfterInstall:
+    - location: scripts/after_install.sh
+      timeout: 300
+      runas: root
+
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: root
+
+  ValidateService:
+    - location: scripts/validate.sh
+      timeout: 120
+      runas: root
+``
