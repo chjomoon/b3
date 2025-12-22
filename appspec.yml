@@ -1,22 +1,30 @@
-version: 0.0               # 또는 0.1/0.2 (리비전 형식에 따라)
+version: 0.0
 os: linux
 
 files:
-  - source: /               # 압축(리비전) 내 루트 기준
-    destination: /var/www/test-angular-project  # EC2 인스턴스의 배포 경로
+  - source: dist/
+    destination: /var/www/test-angular-project/dist
     overwrite: true
 
 permissions:
   - object: /var/www/test-angular-project
     pattern: "**"
-    owner: ec2-user         # 배포할 사용자
+    owner: ec2-user
     group: ec2-user
     mode: 755
     type:
-      - file
       - directory
+
+  - object: /var/www/test-angular-project
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
+    mode: 644
+    type:
+      - file
 
 hooks:
   ApplicationStart:
     - location: scripts/application-start-hook.sh
       timeout: 300
+      runas: ec2-user
