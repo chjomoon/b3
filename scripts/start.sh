@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-# systemd 유닛 갱신 및 서비스 재시작
-systemctl daemon-reload
-systemctl enable myapp.service
-systemctl restart myapp.service
+echo "[ApplicationStart] 시작"
+
+# Nginx 시작/재시작
+sudo systemctl enable nginx
+sudo systemctl restart nginx
+
+# 방화벽/보안 그룹에서 80 포트 오픈되어 있어야 외부 접근 가능
+# 내부 헬스체크는 validate.sh에서 수행
+
+echo "[ApplicationStart] 완료"
